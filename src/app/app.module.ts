@@ -7,21 +7,28 @@ import { IndexComponent } from './index/index.component';
 import { HomeComponent } from './home/home.component';
 import { JqueryComponent } from './jquery/jquery.component';
 import { AppRoutingModule } from "./app-routing.module";
-import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FlexLayoutModule} from "@angular/flex-layout";
+import { MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule } from "@angular/material";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { AngularComponent } from './angular/angular.component';
+import { UserService } from './user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     HomeComponent,
-    JqueryComponent
+    JqueryComponent,
+    AngularComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatMenuModule,
@@ -29,7 +36,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MatButtonModule,
     MatCardModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

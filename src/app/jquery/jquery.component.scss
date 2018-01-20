@@ -2,15 +2,6 @@ $buttonColor: #337ab7;
 $buttonDark: darken($buttonColor, 10%);
 $buttonDarker: darken($buttonDark, 10%);
 
-// minin 정의
-@mixin translate ($x, $y) {
--webkit-transform: translate($x, $y);
--moz-transform: translate($x, $y);
--ms-transform: translate($x, $y);
--o-transform: translate($x, $y);
-transform: translate($x, $y);
-  }
-
 button.active {
 background-color: $buttonColor;
 border: 0;
@@ -23,7 +14,7 @@ box-shadow: 4px 4px 6px $buttonDarker;
 }
 &:active {
     box-shadow: none;
-    @include translate(4px, 4px);
+    // @include translate(4px, 4px);
   }
 
 }
