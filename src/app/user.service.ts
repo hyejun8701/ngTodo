@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { TodoVO } from './domain/todo-vo';
+import { Params } from '@angular/router';
 
 @Injectable()
 export class UserService {
@@ -23,5 +24,16 @@ getTodoList() {
   return this.http.get(this.SERVER + '/api/todo');
 }
 
+removeTodo(todo_id: number) {
+  //return this.http.delete(this.SERVER + `/api/todo?todo_id=${todo_id}`);
+  const params: Params = ({
+    'todo_id': todo_id
+  });
+  return this.http.delete(this.SERVER + '/api/todo', {params: params});
+}
+
+modifyTodo(params: TodoVO) {
+  return this.http.put(this.SERVER + '/api/todo', params, {headers: this.headers});
+}
 
 }

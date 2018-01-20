@@ -28,20 +28,20 @@
           </tr>
           </thead>
           <tbody id="todo_list">
-              <ng-template ngFor let-item [ngForOf]="todoList">
-                <tr [@flyInOut]="'in'" *ngIf="!item.isEdited">
+              <ng-template ngFor let-item [ngForOf]="todoList" let-idx="index">
+                <tr [@flyInOut]="'in'" *ngIf="!item.isEdited" appHighlight [highlightColor]="'#c8fffb'">
                   <td>{{item.isFinished ? '완료' : '미완료'}}</td>
-                  <td>{{item.todo}}</td>
+                  <td [class.todo_canceled]="item.isFinished">{{item.todo}}</td>
                   <td>{{item.created}}</td>
                   <td>{{item.updated}}</td>
                   <td>
                       <button mat-raised-button color="accent" (click)="save(item)">수정</button>
-                      <button mat-raised-button color="warn" (click)="remove(item)">삭제</button>
+                      <button mat-raised-button color="warn" (click)="remove(item, idx)">삭제</button>
                   </td>
                 </tr>
                 <tr [@flyInOut]="'in'" *ngIf="item.isEdited">
                     <td><input type="checkbox" [(ngModel)]="item.isFinished"></td>
-                    <td [class.todo_canceled]="item.isFinished">
+                    <td>
                         <input [(ngModel)]="item.todo">
                         </td>
                         <td>{{item.created}}</td>
