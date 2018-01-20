@@ -24,6 +24,9 @@ export class AngularComponent implements OnInit {
   todoList: Array<TodoVO>;
   newTodo: TodoVO = new TodoVO();
 
+  // 수정 시 담을 컬렉션
+  tempTodoList = new Map<number, TodoVO>();
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
@@ -41,7 +44,37 @@ export class AngularComponent implements OnInit {
   addTodo() {
     console.log('add_todo');
     this.userService.addTodo(this.newTodo)
-    .subscribe(data => console.log(data));
+    .subscribe((data:TodoVO) => this.todoList.unshift(data));
   }
 
+  // 템플릿 폼을 에디터로 전환
+  save(item: TodoVO) {
+    item.isEdited = true;
+    // 기존값 저장: shallow copy(x), deep copy(o)
+    // 1. shallow copy
+    // this.tempTodoList.set(item.todo_id, item);
+    // 2. deep copy
+    const newTodo = new TodoVO();
+    newTodo.isFinished = item.isFinished;
+    newTodo.todo = item.todo;
+    this.tempTodoList.set(item.todo_id, newTodo);
+  }
+
+  // 서버에서 데이터 삭제
+  remove(item: TodoVO) {
+
+  }
+
+  // 서버에서 데이터 수정
+  modify(item: TodoVO) {
+
+  }
+
+  // 에디터 폼을 원래대로 복귀
+  restore(item: TodoVO) {
+    item.isEdited = false;
+    const todoVO = this.tempTodoList.get(item.todo_id);
+    item.isFinished = todoVO.isFinished;
+    item.todo = todoVO.todo;
+  }
 }
