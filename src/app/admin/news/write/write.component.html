@@ -1,8 +1,27 @@
-<mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
-  <mat-card-title>
-  뉴스 목록
-  </mat-card-title>
-  <button mat-raised-button mat-button-sm color="accent" (click)="gotoWrite()" style="margin: 0 1rem 0 0;">
-  <mat-icon>create</mat-icon>글쓰기
-  </button>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>글쓰기</mat-card-title>
   </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="mat-block">
+      <input matInput placeholder="제목" [(ngModel)]="news.title">
+    </mat-form-field>
+    <div>
+      <ckeditor [(ngModel)]="news.content" debounce="10">
+      </ckeditor>
+    </div>
+    <!-- 로컬화일 업로드 구현부 -->
+    <div>
+      <label for="uploadedImage">업로드 이미지 선택</label>
+      <input type="file" (change)="fileChange($event)" id="uploadedImage" accept="image/*" #newFile multiple>
+    </div>
+
+    <div style="margin-top: 1em;" fxLayoutAlign="center center">
+      <button mat-raised-button mat-button-sm color="primary" (click)="addNews()">저 장</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!--<img
+  src="data:image/gif;base64,R0lGODdhMAAwAPAAAAAAAP///ywAAAAAMAAwAAAC8IyPqcvt3wCcDkiLc7C0qwyGHhSWpjQu5yqmCYsapyuvUUlvONmOZtfzgFzByTB10QgxOR0TqBQejhRNzOfkVJ+5YiUqrXF5Y5lKh/DeuNcP5yLWGsEbtLiOSpa/TPg7JpJHxyendzWTBfX0cxOnKPjgBzi4diinWGdkF8kjdfnycQZXZeYGejmJlZeGl9i2icVqaNVailT6F5iJ90m6mvuTS4OK05M0vDk0Q4XUtwvKOzrcd3iq9uisF81M1OIcR7lEewwcLp7tuNNkM3uNna3F2JQFo97Vriy/Xl4/f1cf5VWzXyym7PHhhx4dbgYKAAA7"
+  ALT="Larry">-->
