@@ -46,6 +46,26 @@ export class WriteComponent implements OnInit {
   }
 
   imageUpload() {
+    const formData: FormData = new FormData();
+    if (this.fileList && this.fileList.length > 0) {
+    const file: File = this.fileList[0];
+    formData.append('file', file, file.name);
+    }
 
+    this.adminService.imageUpload(formData)
+    .subscribe(body => {
+    if (body['result'] === 0) {
+    // 이미지 경로를 editor에 추가한다.
+    console.log(body['value']);
+    if (this.news.content) {
+    this.news.content += `<img src="http://www.javabrain.kr${body['value']}
+    style="max-width: 100%;"">`;
+    } else {
+    this.news.content = `<img src="http://www.javabrain.kr${body['value']}"
+    style="max-width: 100%;">`;
+    }
+    }
+    });
+    }
   }
 }
